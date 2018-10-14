@@ -1,5 +1,0 @@
-print("Hello world");
-print("I love dicks");
-print("Only dicks not vagine");
-print("maybe some vagine");
-print("No way")
