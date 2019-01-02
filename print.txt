@@ -1,4 +1,4 @@
 
-System.Out.Println("hello world");
-System.Out.Println("Hi Tanya");
-Print(Zombie)
+System.Out.Println("hello world;");
+System.Out.Println("Hi Tanya;");
+Print("Zombie";)
