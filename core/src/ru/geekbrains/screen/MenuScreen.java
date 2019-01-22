@@ -3,7 +3,6 @@ package ru.geekbrains.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 import ru.geekbrains.base.Base2DScreen;
@@ -21,7 +20,7 @@ public class MenuScreen extends Base2DScreen {
     @Override
     public void show() {
         super.show();
-        background = new Texture("bg.png");
+        background = new Texture("1.png");
         img = new Texture("logo.bmp");
         pos = new Vector2(-0.5f, -0.5f);
         v = new Vector2(0.002f, 0.002f);
