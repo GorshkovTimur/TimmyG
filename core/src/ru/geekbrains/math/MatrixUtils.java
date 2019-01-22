@@ -1,4 +1,4 @@
-package ru.geekbrains.math;
+package ru.geekbrains.Math;
 
 
 import com.badlogic.gdx.math.Matrix3;

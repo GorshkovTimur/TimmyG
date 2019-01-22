@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import ru.geekbrains.math.MatrixUtils;
-import ru.geekbrains.math.Rect;
+import ru.geekbrains.Math.MatrixUtils;
+import ru.geekbrains.Math.Rect;
 
 
 
