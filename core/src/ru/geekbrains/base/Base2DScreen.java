@@ -23,7 +23,12 @@ public class Base2DScreen implements Screen, InputProcessor {
     private Matrix4 worldToGl;
     private Matrix3 screenToWorlds;
 
+    public Vector2 getTouch() {
+        return touch;
+    }
+
     private Vector2 touch;
+    Vector2 v;
 
     @Override
     public void show() {
@@ -36,6 +41,7 @@ public class Base2DScreen implements Screen, InputProcessor {
         this.worldToGl = new Matrix4();
         this.screenToWorlds = new Matrix3();
         touch = new Vector2();
+        v = new Vector2(0,0);
     }
 
     @Override
