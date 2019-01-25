@@ -7,12 +7,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import ru.geekbrains.Math.MatrixUtils;
-import ru.geekbrains.Math.Rect;
 
+import ru.geekbrains.math.MatrixUtils;
+import ru.geekbrains.math.Rect;
 
-
-public class Base2DScreen implements Screen, InputProcessor {
+public abstract class Base2DScreen implements Screen, InputProcessor {
 
     protected SpriteBatch batch;
 
@@ -23,12 +22,7 @@ public class Base2DScreen implements Screen, InputProcessor {
     private Matrix4 worldToGl;
     private Matrix3 screenToWorlds;
 
-    public Vector2 getTouch() {
-        return touch;
-    }
-
     private Vector2 touch;
-    Vector2 v;
 
     @Override
     public void show() {
@@ -41,7 +35,6 @@ public class Base2DScreen implements Screen, InputProcessor {
         this.worldToGl = new Matrix4();
         this.screenToWorlds = new Matrix3();
         touch = new Vector2();
-        v = new Vector2(0,0);
     }
 
     @Override
@@ -63,6 +56,11 @@ public class Base2DScreen implements Screen, InputProcessor {
         MatrixUtils.calcTransitionMatrix(worldToGl, worldBounds, glBounds);
         batch.setProjectionMatrix(worldToGl);
         MatrixUtils.calcTransitionMatrix(screenToWorlds, screenBounds, worldBounds);
+        resize(worldBounds);
+    }
+
+    public void resize(Rect worldBounds) {
+
     }
 
     @Override
