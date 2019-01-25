@@ -15,7 +15,7 @@ public class Sprite extends Rect {
 
     public Sprite(TextureRegion region) {
         if (region == null) {
-            throw new NullPointerException("Create Sprite witth null region");
+            throw new NullPointerException("Create Sprite with null region");
         }
         regions = new TextureRegion[1];
         regions[0] = region;
@@ -42,6 +42,11 @@ public class Sprite extends Rect {
 
     public boolean touchUp(Vector2 touch, int pointer) {
         return false;
+    }
+
+    @Override
+    public boolean isMe(Vector2 touch) {
+        return super.isMe(touch);
     }
 
     public void draw(SpriteBatch batch) {

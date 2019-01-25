@@ -11,6 +11,8 @@ import ru.geekbrains.base.Base2DScreen;
 import ru.geekbrains.math.Rect;
 import ru.geekbrains.sprite.Background;
 import ru.geekbrains.sprite.Star;
+import ru.geekbrains.sprite.menu.ExitButton;
+import ru.geekbrains.sprite.menu.PlayButton;
 
 public class MenuScreen extends Base2DScreen {
 
@@ -18,7 +20,8 @@ public class MenuScreen extends Base2DScreen {
     private Texture bg;
     private Background background;
     private Star star[];
-
+    private ExitButton eb;
+    private PlayButton pb;
 
     @Override
     public void show() {
@@ -27,9 +30,13 @@ public class MenuScreen extends Base2DScreen {
         background = new Background(new TextureRegion(bg));
         atlas = new TextureAtlas("textures/menuAtlas.tpack");
         star = new Star[256];
+        eb = new ExitButton(atlas.findRegion("btExit"));
+        pb = new PlayButton(atlas.findRegion("btPlay"));
         for (int i = 0; i < star.length; i++) {
             star[i] = new Star(atlas);
         }
+
+
     }
 
     @Override
@@ -43,6 +50,9 @@ public class MenuScreen extends Base2DScreen {
         for (int i = 0; i < star.length; i++) {
             star[i].update(delta);
         }
+        eb.update(delta);
+
+
     }
 
     public void draw() {
@@ -53,6 +63,8 @@ public class MenuScreen extends Base2DScreen {
         for (int i = 0; i < star.length; i++) {
             star[i].draw(batch);
         }
+        eb.draw(batch);
+        pb.draw(batch);
         batch.end();
     }
 
