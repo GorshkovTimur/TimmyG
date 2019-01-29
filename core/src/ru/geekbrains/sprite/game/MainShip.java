@@ -1,6 +1,8 @@
 package ru.geekbrains.sprite.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -10,7 +12,7 @@ import ru.geekbrains.math.Rect;
 import ru.geekbrains.pool.BulletPool;
 
 public class MainShip extends Sprite {
-
+    private Sound sound = Gdx.audio.newSound(Gdx.files.internal("sound/shot.mp3"));
     private Rect worldBounds;
 
     private final Vector2 v0 = new Vector2(0.5f, 0);
@@ -102,11 +104,21 @@ public class MainShip extends Sprite {
     }
 
     private void moveRight() {
-        v.set(v0);
+        if (v.x>=1f){
+            v.set(1f,0);}
+            else {
+
+            v.set(v0);
+        }
     }
 
     private void moveLeft() {
-        v.set(v0).rotate(180);
+        if (v.x<=-1f){
+            v.set(-1f,0);
+        }
+        else {
+            v.set(v0).rotate(180);
+        }
     }
 
     private void stop() {
@@ -115,6 +127,7 @@ public class MainShip extends Sprite {
 
     private void shoot() {
         Bullet bullet = bulletPool.obtain();
+        sound.play(0.5f);
         bullet.set(this, bulletRegion, pos, new Vector2(0, 0.5f), 0.01f, worldBounds, 1);
     }
 

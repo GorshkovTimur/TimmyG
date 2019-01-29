@@ -2,6 +2,7 @@ package ru.geekbrains.screen;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -17,6 +18,7 @@ import ru.geekbrains.sprite.menu.ButtonPlay;
 
 public class MenuScreen extends Base2DScreen {
 
+    private Music gsMusic = Gdx.audio.newMusic(Gdx.files.internal("assets/deck16.mp3"))
     private Game game;
 
     private TextureAtlas atlas;
@@ -43,6 +45,9 @@ public class MenuScreen extends Base2DScreen {
         }
         buttonExit = new ButtonExit(atlas);
         buttonPlay = new ButtonPlay(atlas, game);
+        gsMusic.setVolume(0.3f);
+        gsMusic.setLooping(true);
+        gsMusic.play();
     }
 
     @Override
