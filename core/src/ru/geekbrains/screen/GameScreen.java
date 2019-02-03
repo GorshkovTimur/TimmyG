@@ -15,6 +15,7 @@ import ru.geekbrains.math.Rect;
 import ru.geekbrains.pool.BulletPool;
 import ru.geekbrains.pool.EnemyPool;
 import ru.geekbrains.pool.ExplosionPool;
+import ru.geekbrains.pool.SawPool;
 import ru.geekbrains.sprite.Background;
 import ru.geekbrains.sprite.Star;
 import ru.geekbrains.sprite.game.Bullet;
@@ -33,6 +34,7 @@ public class GameScreen extends Base2DScreen {
     private BulletPool bulletPool;
     private ExplosionPool explosionPool;
     private EnemyPool enemyPool;
+    private SawPool sawPool;
 
     private EnemyEmitter enemyEmitter;
 
@@ -54,7 +56,7 @@ public class GameScreen extends Base2DScreen {
         }
         bulletPool = new BulletPool();
         explosionPool = new ExplosionPool(atlas);
-        mainShip = new MainShip(atlas, bulletPool, explosionPool);
+        mainShip = new MainShip(atlas, bulletPool,sawPool,explosionPool);
         enemyPool = new EnemyPool(bulletPool, worldBounds, explosionPool, mainShip);
 
         enemyEmitter = new EnemyEmitter(atlas, enemyPool, worldBounds);

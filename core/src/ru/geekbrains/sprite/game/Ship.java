@@ -8,6 +8,7 @@ import ru.geekbrains.base.Sprite;
 import ru.geekbrains.math.Rect;
 import ru.geekbrains.pool.BulletPool;
 import ru.geekbrains.pool.ExplosionPool;
+import ru.geekbrains.pool.SawPool;
 
 public class Ship extends Sprite {
 
@@ -17,7 +18,10 @@ public class Ship extends Sprite {
 
     protected BulletPool bulletPool;
     protected ExplosionPool explosionPool;
+    protected SawPool sawPool;
     protected TextureRegion bulletRegion;
+    protected Saw saw;
+
 
     protected float reloadInterval;
     protected float reloadTimer;
@@ -60,6 +64,12 @@ public class Ship extends Sprite {
         shootSound.play();
         Bullet bullet = bulletPool.obtain();
         bullet.set(this, bulletRegion, pos, bulletV, bulletHeight, worldBounds, damage);
+    }
+
+    public void sawShoot() {
+        shootSound.play();
+        Bullet bullet = bulletPool.obtain();
+        saw.set(this, bulletRegion, pos, bulletV, bulletHeight, worldBounds, damage);
     }
 
     public void boom() {
