@@ -20,10 +20,12 @@ import ru.geekbrains.sprite.Star;
 import ru.geekbrains.sprite.game.Bullet;
 import ru.geekbrains.sprite.game.Enemy;
 import ru.geekbrains.sprite.game.MainShip;
+import ru.geekbrains.sprite.menu.GameOverBtn;
 import ru.geekbrains.utils.EnemyEmitter;
 
 public class GameScreen extends Base2DScreen {
 
+    private GameOverBtn gameOver;
     private TextureAtlas atlas;
     private Texture bg;
     private Background background;
@@ -58,6 +60,8 @@ public class GameScreen extends Base2DScreen {
         enemyPool = new EnemyPool(bulletPool, worldBounds, explosionPool, mainShip);
 
         enemyEmitter = new EnemyEmitter(atlas, enemyPool, worldBounds);
+
+        gameOver = new GameOverBtn(atlas);
     }
 
     @Override
@@ -75,11 +79,12 @@ public class GameScreen extends Base2DScreen {
         }
         if (!mainShip.isDestroyed()) {
             mainShip.update(delta);
-        }
+
         bulletPool.updateActiveSprites(delta);
         explosionPool.updateActiveSprites(delta);
         enemyPool.updateActiveSprites(delta);
         enemyEmitter.generate(delta);
+        }
     }
 
     private void checkCollisions() {
@@ -139,10 +144,15 @@ public class GameScreen extends Base2DScreen {
         }
         if (!mainShip.isDestroyed()) {
             mainShip.draw(batch);
+            bulletPool.drawActiveSprites(batch);
+            explosionPool.drawActiveSprites(batch);
+            enemyPool.drawActiveSprites(batch);
         }
-        bulletPool.drawActiveSprites(batch);
-        explosionPool.drawActiveSprites(batch);
-        enemyPool.drawActiveSprites(batch);
+        else{
+            gameOver.draw(batch);
+        }
+
+
         batch.end();
     }
 
@@ -154,6 +164,9 @@ public class GameScreen extends Base2DScreen {
             aStar.resize(worldBounds);
         }
         mainShip.resize(worldBounds);
+        if(mainShip.isDestroyed()) {
+            gameOver.resize(worldBounds);
+        }
     }
 
     @Override
@@ -189,6 +202,9 @@ public class GameScreen extends Base2DScreen {
         if (!mainShip.isDestroyed()) {
             mainShip.touchDown(touch, pointer);
         }
+        else{
+            gameOver.touchDown(touch,pointer);
+        }
         return super.touchDown(touch, pointer);
     }
 
@@ -196,6 +212,9 @@ public class GameScreen extends Base2DScreen {
     public boolean touchUp(Vector2 touch, int pointer) {
         if (!mainShip.isDestroyed()) {
             mainShip.touchUp(touch, pointer);
+        }
+        else{
+            gameOver.touchUp(touch,pointer);
         }
         return super.touchUp(touch, pointer);
     }
