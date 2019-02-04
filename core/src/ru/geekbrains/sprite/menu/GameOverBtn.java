@@ -1,5 +1,6 @@
 package ru.geekbrains.sprite.menu;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -14,7 +15,7 @@ public class GameOverBtn extends ScaledTouchUpButton {
 
     @Override
     public void action() {
-        System.out.println("Game Over");
+        Gdx.app.exit();
     }
 
     @Override
