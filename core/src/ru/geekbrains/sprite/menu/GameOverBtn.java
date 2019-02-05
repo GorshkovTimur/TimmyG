@@ -10,7 +10,7 @@ public class GameOverBtn extends ScaledTouchUpButton {
 
     public GameOverBtn(TextureAtlas atlas) {
         super(atlas.findRegion("message_game_over"));
-        setHeightProportion(0.07f);
+        setHeightProportion(0.03f);
     }
 
     @Override
@@ -21,6 +21,7 @@ public class GameOverBtn extends ScaledTouchUpButton {
     @Override
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
-        setTop(worldBounds.getTop());
+        setBottom(worldBounds.getBottom() + 0.02f);
+        setLeft(worldBounds.getLeft() + 0.02f);
     }
 }

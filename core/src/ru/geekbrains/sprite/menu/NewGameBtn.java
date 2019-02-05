@@ -1,7 +1,6 @@
 package ru.geekbrains.sprite.menu;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import ru.geekbrains.math.Rect;
@@ -25,6 +24,6 @@ public class NewGameBtn extends ScaledTouchUpButton {
     @Override
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
-        setBottom(worldBounds.getBottom()+0.3f);
+        setBottom(worldBounds.getBottom()-0.5f);
     }
 }
