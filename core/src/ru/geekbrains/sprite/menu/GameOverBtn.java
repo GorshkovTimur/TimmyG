@@ -21,6 +21,6 @@ public class GameOverBtn extends ScaledTouchUpButton {
     @Override
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
-        setTop(worldBounds.getTop()-0.3f);
+        setTop(worldBounds.getTop());
     }
 }

@@ -1,5 +1,6 @@
 package ru.geekbrains.screen;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,11 +22,17 @@ import ru.geekbrains.sprite.game.Bullet;
 import ru.geekbrains.sprite.game.Enemy;
 import ru.geekbrains.sprite.game.MainShip;
 import ru.geekbrains.sprite.menu.GameOverBtn;
+import ru.geekbrains.sprite.menu.NewGameBtn;
 import ru.geekbrains.utils.EnemyEmitter;
 
 public class GameScreen extends Base2DScreen {
 
+
+
+    private Game game;
+
     private GameOverBtn gameOver;
+    private NewGameBtn newGame;
     private TextureAtlas atlas;
     private Texture bg;
     private Background background;
@@ -62,6 +69,11 @@ public class GameScreen extends Base2DScreen {
         enemyEmitter = new EnemyEmitter(atlas, enemyPool, worldBounds);
 
         gameOver = new GameOverBtn(atlas);
+        newGame = new NewGameBtn(atlas,game);
+    }
+
+    public GameScreen(Game game) {
+        this.game = game;
     }
 
     @Override
@@ -150,6 +162,7 @@ public class GameScreen extends Base2DScreen {
         }
         else{
             gameOver.draw(batch);
+            newGame.draw(batch);
         }
 
 
@@ -166,6 +179,7 @@ public class GameScreen extends Base2DScreen {
         mainShip.resize(worldBounds);
         if(mainShip.isDestroyed()) {
             gameOver.resize(worldBounds);
+            newGame.resize(worldBounds);
         }
     }
 
@@ -204,6 +218,7 @@ public class GameScreen extends Base2DScreen {
         }
         else{
             gameOver.touchDown(touch,pointer);
+            newGame.touchDown(touch,pointer);
         }
         return super.touchDown(touch, pointer);
     }
@@ -215,6 +230,7 @@ public class GameScreen extends Base2DScreen {
         }
         else{
             gameOver.touchUp(touch,pointer);
+            newGame.touchUp(touch,pointer);
         }
         return super.touchUp(touch, pointer);
     }
