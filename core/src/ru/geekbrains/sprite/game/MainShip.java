@@ -35,7 +35,7 @@ public class MainShip extends Ship {
         this.bulletV = new Vector2(0, 0.5f);
         this.bulletHeight = 0.01f;
         this.damage = 1;
-        this.hp = 100;
+        this.hp = 1;
     }
 
     @Override
