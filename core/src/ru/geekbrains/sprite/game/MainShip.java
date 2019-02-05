@@ -26,6 +26,7 @@ public class MainShip extends Ship {
     public MainShip(TextureAtlas atlas, BulletPool bulletPool, SawPool sawPool, ExplosionPool explosionPool) {
         super(atlas.findRegion("main_ship"), 1, 2, 2);
         this.bulletRegion = atlas.findRegion("bulletMainShip");
+        this.sawRegion = new TextureAtlas("textures/weap.pack").findRegion("saw");
         this.bulletPool = bulletPool;
         this.sawPool = sawPool;
         this.explosionPool = explosionPool;
@@ -74,6 +75,9 @@ public class MainShip extends Ship {
             case Input.Keys.RIGHT:
                 isPressedRight = true;
                 moveRight();
+                break;
+            case Input.Keys.BACKSPACE:
+                sawShoot();
                 break;
         }
         return false;

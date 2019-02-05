@@ -19,8 +19,9 @@ public class Ship extends Sprite {
     protected BulletPool bulletPool;
     protected ExplosionPool explosionPool;
     protected SawPool sawPool;
+
     protected TextureRegion bulletRegion;
-    protected Saw saw;
+    protected TextureRegion sawRegion;
 
 
     protected float reloadInterval;
@@ -67,9 +68,8 @@ public class Ship extends Sprite {
     }
 
     public void sawShoot() {
-        shootSound.play();
-        Bullet bullet = bulletPool.obtain();
-        saw.set(this, bulletRegion, pos, bulletV, bulletHeight, worldBounds, damage);
+        Saw saw = sawPool.obtain();
+        saw.set(this, sawRegion, pos, bulletV, bulletHeight, worldBounds, damage);
     }
 
     public void boom() {

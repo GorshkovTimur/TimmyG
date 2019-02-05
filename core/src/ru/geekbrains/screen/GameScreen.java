@@ -67,6 +67,7 @@ public class GameScreen extends Base2DScreen {
         explosionPool = new ExplosionPool(atlas);
         mainShip = new MainShip(atlas, bulletPool,sawPool,explosionPool);
         enemyPool = new EnemyPool(bulletPool, worldBounds, explosionPool, mainShip);
+        sawPool = new SawPool();
 
         enemyEmitter = new EnemyEmitter(atlas, enemyPool, worldBounds);
 
@@ -95,6 +96,7 @@ public class GameScreen extends Base2DScreen {
             mainShip.update(delta);
 
         bulletPool.updateActiveSprites(delta);
+        sawPool.updateActiveSprites(delta);
         explosionPool.updateActiveSprites(delta);
         enemyPool.updateActiveSprites(delta);
         enemyEmitter.generate(delta);
@@ -146,6 +148,7 @@ public class GameScreen extends Base2DScreen {
         bulletPool.freeAllDestroyedActiveSprites();
         explosionPool.freeAllDestroyedActiveSprites();
         enemyPool.freeAllDestroyedActiveSprites();
+        sawPool.freeAllDestroyedActiveSprites();
     }
 
     private void draw() {
@@ -161,6 +164,7 @@ public class GameScreen extends Base2DScreen {
             bulletPool.drawActiveSprites(batch);
             explosionPool.drawActiveSprites(batch);
             enemyPool.drawActiveSprites(batch);
+            sawPool.drawActiveSprites(batch);
         }
         else{
             gameOver.draw(batch);
@@ -190,6 +194,7 @@ public class GameScreen extends Base2DScreen {
         bg.dispose();
         atlas.dispose();
         bulletPool.dispose();
+        sawPool.dispose();
         explosionPool.dispose();
         enemyPool.dispose();
         mainShip.dispose();
