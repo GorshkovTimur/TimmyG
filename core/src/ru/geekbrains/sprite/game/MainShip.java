@@ -35,6 +35,7 @@ public class MainShip extends Ship {
         setHeightProportion(0.15f);
         this.bulletV = new Vector2(0, 0.5f);
         this.bulletHeight = 0.01f;
+        this.sawHeight = 0.05f;
         this.damage = 1;
         this.hp = 1;
     }

@@ -64,10 +64,11 @@ public class GameScreen extends Base2DScreen {
             star[i] = new Star(atlas);
         }
         bulletPool = new BulletPool();
+        sawPool = new SawPool();
         explosionPool = new ExplosionPool(atlas);
         mainShip = new MainShip(atlas, bulletPool,sawPool,explosionPool);
         enemyPool = new EnemyPool(bulletPool, worldBounds, explosionPool, mainShip);
-        sawPool = new SawPool();
+
 
         enemyEmitter = new EnemyEmitter(atlas, enemyPool, worldBounds);
 
