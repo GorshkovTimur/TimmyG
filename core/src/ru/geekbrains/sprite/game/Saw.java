@@ -9,7 +9,7 @@ import ru.geekbrains.math.Rect;
 public class Saw extends Sprite {
     private Rect worldBounds;
     private Vector2 v = new Vector2();
-    private int damage=900;
+    private int damage = 900;
     private Object owner;
 
     public Saw() {
@@ -19,9 +19,11 @@ public class Saw extends Sprite {
     @Override
     public void update(float delta) {
         pos.mulAdd(v, delta);
+        checkAndHandleBounds();
         if (isOutside(worldBounds)) {
             destroy();
         }
+        System.out.println(getRight()+" "+worldBounds.getLeft());
     }
 
     public void set(
@@ -48,6 +50,12 @@ public class Saw extends Sprite {
 
     public Object getOwner() {
         return owner;
+    }
+
+    private void checkAndHandleBounds() {
+        if ((getRight()-0.05f) < worldBounds.getLeft()) v.scl(-1f,1f);
+        if ((getLeft()+0.05f) > worldBounds.getRight()) v.scl(-1f,1f);
+
     }
 }
 

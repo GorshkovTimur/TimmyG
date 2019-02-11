@@ -78,7 +78,7 @@ public class GameScreen extends Base2DScreen {
         bulletPool = new BulletPool();
         sawPool = new SawPool();
         explosionPool = new ExplosionPool(atlas);
-        mainShip = new MainShip(atlas, bulletPool,sawPool,explosionPool);
+        mainShip = new MainShip(atlas, bulletPool,sawPool,explosionPool,worldBounds);
         enemyPool = new EnemyPool(bulletPool, worldBounds, explosionPool, mainShip);
 
 
@@ -109,6 +109,7 @@ public class GameScreen extends Base2DScreen {
                 mainShip.update(delta);
                 bulletPool.updateActiveSprites(delta);
                 enemyPool.updateActiveSprites(delta);
+                sawPool.updateActiveSprites(delta);
                 enemyEmitter.generate(delta, frags);
                 break;
             case GAME_OVER:
@@ -185,6 +186,7 @@ public class GameScreen extends Base2DScreen {
                 mainShip.draw(batch);
                 bulletPool.drawActiveSprites(batch);
                 enemyPool.drawActiveSprites(batch);
+                sawPool.drawActiveSprites(batch);
                 break;
             case GAME_OVER:
                 messageGameOver.draw(batch);

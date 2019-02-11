@@ -33,6 +33,7 @@ public class Ship extends Sprite {
     protected Sound shootSound;
 
     protected Vector2 bulletV;
+    protected Vector2 sawV;
     protected float bulletHeight;
     protected float sawHeight;
     protected int damage;
@@ -70,7 +71,7 @@ public class Ship extends Sprite {
 
     public void sawShoot() {
         Saw saw = sawPool.obtain();
-        saw.set(this, sawRegion, pos, bulletV, sawHeight, worldBounds, damage);
+        saw.set(this, sawRegion, pos, sawV, sawHeight, worldBounds, damage);
     }
 
     public void boom() {

@@ -22,7 +22,7 @@ public class MainShip extends Ship {
     private int leftPointer = INVALID_POINTER;
     private int rightPointer = INVALID_POINTER;
 
-    public MainShip(TextureAtlas atlas, BulletPool bulletPool, SawPool sawPool, ExplosionPool explosionPool) {
+    public MainShip(TextureAtlas atlas, BulletPool bulletPool, SawPool sawPool, ExplosionPool explosionPool,Rect worldBounds) {
         super(atlas.findRegion("main_ship"), 1, 2, 2);
         this.worldBounds = worldBounds;
         this.bulletRegion = atlas.findRegion("bulletMainShip");
@@ -34,6 +34,7 @@ public class MainShip extends Ship {
         this.shootSound = Gdx.audio.newSound(Gdx.files.internal("sounds/laser.wav"));
         setHeightProportion(0.15f);
         this.bulletV = new Vector2(0, 0.5f);
+        this.sawV = new Vector2(-0.30f,0.15f);
         this.bulletHeight = 0.01f;
         this.sawHeight = 0.05f;
         this.damage = 1;
@@ -86,6 +87,7 @@ public class MainShip extends Ship {
                 break;
             case Input.Keys.BACKSPACE:
                 sawShoot();
+                System.out.println("Пошла пила");
                 break;
         }
         return false;
