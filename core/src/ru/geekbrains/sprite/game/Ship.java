@@ -38,6 +38,8 @@ public class Ship extends Sprite {
     protected float sawHeight;
     protected int damage;
 
+    protected int sawDamage;
+
     protected int hp;
 
     public Ship() {

@@ -23,6 +23,7 @@ import ru.geekbrains.sprite.game.Bullet;
 import ru.geekbrains.sprite.game.Enemy;
 import ru.geekbrains.sprite.game.MainShip;
 import ru.geekbrains.sprite.game.MessageGameOver;
+import ru.geekbrains.sprite.game.Saw;
 import ru.geekbrains.sprite.game.StartNewGame;
 import ru.geekbrains.utils.EnemyEmitter;
 import ru.geekbrains.utils.Font;
@@ -132,6 +133,7 @@ public class GameScreen extends Base2DScreen {
                 }
             }
             List<Bullet> bulletList = bulletPool.getActiveObjects();
+            List<Saw> sawList = sawPool.getActiveObjects();
 
             for (Bullet bullet : bulletList) {
                 if (bullet.getOwner() == mainShip || bullet.isDestroyed()) {
@@ -157,6 +159,14 @@ public class GameScreen extends Base2DScreen {
                             frags++;
                         }
                         bullet.destroy();
+                    }
+                }
+                for (Saw saw : sawList){
+                    if (saw.getOwner()!=mainShip || saw.isDestroyed()){
+                        continue;
+                    }
+                    if (enemy.isSawCollision(saw)){
+                        enemy.damage(mainShip);
                     }
                 }
             }
