@@ -2,7 +2,6 @@ package ru.geekbrains.sprite.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 
@@ -25,6 +24,7 @@ public class MainShip extends Ship {
 
     public MainShip(TextureAtlas atlas, BulletPool bulletPool, SawPool sawPool, ExplosionPool explosionPool) {
         super(atlas.findRegion("main_ship"), 1, 2, 2);
+        this.worldBounds = worldBounds;
         this.bulletRegion = atlas.findRegion("bulletMainShip");
         this.sawRegion = new TextureAtlas("textures/weap.pack").findRegion("saw");
         this.bulletPool = bulletPool;
@@ -37,7 +37,14 @@ public class MainShip extends Ship {
         this.bulletHeight = 0.01f;
         this.sawHeight = 0.05f;
         this.damage = 1;
-        this.hp = 1;
+        startNewGame();
+    }
+
+    public void startNewGame() {
+        stop();
+        pos.x = worldBounds.pos.x;
+        this.hp = 100;
+        flushDestroy();
     }
 
     @Override
