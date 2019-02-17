@@ -19,6 +19,10 @@ public class MainShip extends Ship {
     private boolean isPressedLeft;
     private boolean isPressedRight;
 
+
+
+
+    private int saw = 3;
     private int leftPointer = INVALID_POINTER;
     private int rightPointer = INVALID_POINTER;
 
@@ -38,6 +42,7 @@ public class MainShip extends Ship {
         this.bulletHeight = 0.01f;
         this.sawHeight = 0.05f;
         this.damage = 1;
+        this.sawDamage = 5;
         startNewGame();
     }
 
@@ -86,9 +91,12 @@ public class MainShip extends Ship {
                 moveRight();
                 break;
             case Input.Keys.BACKSPACE:
-                sawShoot();
-                System.out.println("Пошла пила");
-                break;
+                if (saw>0) {
+                    sawShoot();
+                    saw--;
+                    System.out.println("Пошла пила");
+                    break;
+                }
         }
         return false;
     }
@@ -175,6 +183,14 @@ public class MainShip extends Ship {
 
     private void stop() {
         v.setZero();
+    }
+
+    public int getSaw() {
+        return saw;
+    }
+
+    public void setSaw(int saw) {
+        this.saw = saw;
     }
 
 }

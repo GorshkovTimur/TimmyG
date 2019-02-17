@@ -33,6 +33,7 @@ public class GameScreen extends Base2DScreen {
     private static final String FRAGS = "Frags: ";
     private static final String HP = "HP: ";
     private static final String LEVEL = "Level: ";
+    private static final String SAW = "Saw ";
 
     private enum State {PLAYING, GAME_OVER}
 
@@ -166,7 +167,10 @@ public class GameScreen extends Base2DScreen {
                         continue;
                     }
                     if (enemy.isSawCollision(saw)){
-                        enemy.damage(mainShip);
+                        enemy.damage(mainShip.getSawDamage());
+                        if (enemy.isDestroyed()) {
+                            frags++;
+                        }
                     }
                 }
             }
