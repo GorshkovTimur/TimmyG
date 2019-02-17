@@ -91,4 +91,12 @@ public class Enemy extends Ship {
                 || bullet.getTop() < pos.y
         );
     }
+
+    public boolean isSawCollision(Rect saw) {
+        return !(saw.getRight() < getLeft()
+                || saw.getLeft() > getRight()
+                || saw.getBottom() > getTop()
+                || saw.getTop() < pos.y
+        );
+    }
 }

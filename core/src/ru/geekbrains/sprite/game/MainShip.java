@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import ru.geekbrains.math.Rect;
 import ru.geekbrains.pool.BulletPool;
 import ru.geekbrains.pool.ExplosionPool;
+import ru.geekbrains.pool.SawPool;
 
 public class MainShip extends Ship {
 
@@ -18,21 +19,30 @@ public class MainShip extends Ship {
     private boolean isPressedLeft;
     private boolean isPressedRight;
 
+
+
+
+    private int saw = 3;
     private int leftPointer = INVALID_POINTER;
     private int rightPointer = INVALID_POINTER;
 
-    public MainShip(TextureAtlas atlas, BulletPool bulletPool, ExplosionPool explosionPool, Rect worldBounds) {
+    public MainShip(TextureAtlas atlas, BulletPool bulletPool, SawPool sawPool, ExplosionPool explosionPool,Rect worldBounds) {
         super(atlas.findRegion("main_ship"), 1, 2, 2);
         this.worldBounds = worldBounds;
         this.bulletRegion = atlas.findRegion("bulletMainShip");
+        this.sawRegion = new TextureAtlas("textures/weap.pack").findRegion("saw");
         this.bulletPool = bulletPool;
+        this.sawPool = sawPool;
         this.explosionPool = explosionPool;
         this.reloadInterval = 0.2f;
         this.shootSound = Gdx.audio.newSound(Gdx.files.internal("sounds/laser.wav"));
         setHeightProportion(0.15f);
         this.bulletV = new Vector2(0, 0.5f);
+        this.sawV = new Vector2(-0.30f,0.15f);
         this.bulletHeight = 0.01f;
+        this.sawHeight = 0.05f;
         this.damage = 1;
+        this.sawDamage = 5;
         startNewGame();
     }
 
@@ -80,6 +90,13 @@ public class MainShip extends Ship {
                 isPressedRight = true;
                 moveRight();
                 break;
+            case Input.Keys.BACKSPACE:
+                if (saw>0) {
+                    sawShoot();
+                    saw--;
+                    System.out.println("Пошла пила");
+                    break;
+                }
         }
         return false;
     }
@@ -166,6 +183,14 @@ public class MainShip extends Ship {
 
     private void stop() {
         v.setZero();
+    }
+
+    public int getSaw() {
+        return saw;
+    }
+
+    public void setSaw(int saw) {
+        this.saw = saw;
     }
 
 }

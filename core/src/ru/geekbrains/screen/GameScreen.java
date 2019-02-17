@@ -16,12 +16,14 @@ import ru.geekbrains.math.Rect;
 import ru.geekbrains.pool.BulletPool;
 import ru.geekbrains.pool.EnemyPool;
 import ru.geekbrains.pool.ExplosionPool;
+import ru.geekbrains.pool.SawPool;
 import ru.geekbrains.sprite.Background;
 import ru.geekbrains.sprite.Star;
 import ru.geekbrains.sprite.game.Bullet;
 import ru.geekbrains.sprite.game.Enemy;
 import ru.geekbrains.sprite.game.MainShip;
 import ru.geekbrains.sprite.game.MessageGameOver;
+import ru.geekbrains.sprite.game.Saw;
 import ru.geekbrains.sprite.game.StartNewGame;
 import ru.geekbrains.utils.EnemyEmitter;
 import ru.geekbrains.utils.Font;
@@ -31,6 +33,7 @@ public class GameScreen extends Base2DScreen {
     private static final String FRAGS = "Frags: ";
     private static final String HP = "HP: ";
     private static final String LEVEL = "Level: ";
+    private static final String SAW = "Saw ";
 
     private enum State {PLAYING, GAME_OVER}
 
@@ -45,6 +48,7 @@ public class GameScreen extends Base2DScreen {
     private BulletPool bulletPool;
     private ExplosionPool explosionPool;
     private EnemyPool enemyPool;
+    private SawPool sawPool;
 
     private EnemyEmitter enemyEmitter;
 
@@ -74,9 +78,11 @@ public class GameScreen extends Base2DScreen {
             star[i] = new Star(atlas);
         }
         bulletPool = new BulletPool();
+        sawPool = new SawPool();
         explosionPool = new ExplosionPool(atlas);
-        mainShip = new MainShip(atlas, bulletPool, explosionPool, worldBounds);
+        mainShip = new MainShip(atlas, bulletPool,sawPool,explosionPool,worldBounds);
         enemyPool = new EnemyPool(bulletPool, worldBounds, explosionPool, mainShip);
+
 
         enemyEmitter = new EnemyEmitter(atlas, enemyPool, worldBounds);
         messageGameOver = new MessageGameOver(atlas);
@@ -105,6 +111,7 @@ public class GameScreen extends Base2DScreen {
                 mainShip.update(delta);
                 bulletPool.updateActiveSprites(delta);
                 enemyPool.updateActiveSprites(delta);
+                sawPool.updateActiveSprites(delta);
                 enemyEmitter.generate(delta, frags);
                 break;
             case GAME_OVER:
@@ -127,6 +134,7 @@ public class GameScreen extends Base2DScreen {
                 }
             }
             List<Bullet> bulletList = bulletPool.getActiveObjects();
+            List<Saw> sawList = sawPool.getActiveObjects();
 
             for (Bullet bullet : bulletList) {
                 if (bullet.getOwner() == mainShip || bullet.isDestroyed()) {
@@ -154,6 +162,17 @@ public class GameScreen extends Base2DScreen {
                         bullet.destroy();
                     }
                 }
+                for (Saw saw : sawList){
+                    if (saw.getOwner()!=mainShip || saw.isDestroyed()){
+                        continue;
+                    }
+                    if (enemy.isSawCollision(saw)){
+                        enemy.damage(mainShip.getSawDamage());
+                        if (enemy.isDestroyed()) {
+                            frags++;
+                        }
+                    }
+                }
             }
         }
     }
@@ -165,6 +184,7 @@ public class GameScreen extends Base2DScreen {
         bulletPool.freeAllDestroyedActiveSprites();
         explosionPool.freeAllDestroyedActiveSprites();
         enemyPool.freeAllDestroyedActiveSprites();
+        sawPool.freeAllDestroyedActiveSprites();
     }
 
     private void draw() {
@@ -180,6 +200,7 @@ public class GameScreen extends Base2DScreen {
                 mainShip.draw(batch);
                 bulletPool.drawActiveSprites(batch);
                 enemyPool.drawActiveSprites(batch);
+                sawPool.drawActiveSprites(batch);
                 break;
             case GAME_OVER:
                 messageGameOver.draw(batch);
@@ -215,6 +236,7 @@ public class GameScreen extends Base2DScreen {
         bg.dispose();
         atlas.dispose();
         bulletPool.dispose();
+        sawPool.dispose();
         explosionPool.dispose();
         enemyPool.dispose();
         mainShip.dispose();
